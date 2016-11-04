@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<p>
+	<%= link_to 'Add Student', new_gbook_student_path(@gbook) %>
+<p>
+<p>
+	<%= link_to 'View Students', gbook_students_path(@gbook) %>
+<p>
+<p>
+	<%= link_to 'Add Category', new_gbook_category_path(@gbook) %>
+<p>
+<p>
+	<%= link_to 'View Categories', gbook_categories_path(@gbook) %>
+<p>
+<p>
+	<%= link_to 'Add Assignment', new_gbook_assignment_path(@gbook) %>
+<p>
+<p>
+	<%= link_to 'View Assignments', gbook_assignments_path(@gbook) %>
+<p>
+<%= link_to 'Edit', edit_gbook_path(@gbook) %> |
+<%= link_to 'Back', gbooks_path %>

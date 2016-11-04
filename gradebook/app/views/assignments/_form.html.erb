@@ -1,0 +1,30 @@
+<%= form_for([@gbook, @category, @assignment]) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.select :category_id, [[@gbook.categories.first.name,@gbook.categories.first.id],[@gbook.categories.second.name,@gbook.categories.second.id],[@gbook.categories.last.name,@gbook.categories.last.id]] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :point_total %><br>
+    <%= f.text_field :point_total %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
