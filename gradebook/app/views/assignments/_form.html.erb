@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.select :category_id, [[@gbook.categories.first.name,@gbook.categories.first.id],[@gbook.categories.second.name,@gbook.categories.second.id],[@gbook.categories.last.name,@gbook.categories.last.id]] %>
+    <%= f.select :category_id, [[@gbook.categories.first,@gbook.categories.first],[@gbook.categories.second,@gbook.categories.second],[@gbook.categories.last,@gbook.categories.last]] %>
   </div>
 
   <div class="field">
