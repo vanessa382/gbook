@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Students</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= link_to 'Show', gbook_student_path(@gbook,student) %></td>
+        <td><%= link_to 'Edit', edit_gbook_student_path(@gbook,student) %></td>
+        <td><%= link_to 'Destroy', gbook_student_path(@gbook,student), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student', new_gbook_student_path %> |
+<%= link_to 'Back', gbook_path(@gbook) %>

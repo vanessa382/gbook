@@ -1,4 +1,0 @@
-<%= form_for([@gbook,@assignment,@student, @grade], url: new_gbook_assignment_student_grade_path) do |f| %>
-  <p> <%= f.text_field :score, placeholder: "0" %> <%= " out of " + @assignment.point_total.to_s %> </p>
-  <%= f.submit %>
-<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Weight</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.weight %></td>
+        <td><%= category.name %></td>
+         <td><%= link_to 'Show', gbook_category_path(@gbook,category.id) %></td>
+        <td><%= link_to 'Edit', edit_gbook_category_path(@gbook,category.id) %></td>
+        <td><%= link_to 'Destroy', gbook_category_path(@gbook,category.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Category', new_gbook_category_path %>
+<%= link_to 'Back', gbook_path(@gbook) %>
+
