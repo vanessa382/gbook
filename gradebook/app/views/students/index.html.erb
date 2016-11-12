@@ -14,6 +14,9 @@
     <% @students.each do |student| %>
       <tr>
         <td><%= student.name %></td>
+        <td><%= link_to 'Show', gbook_student_path(@gbook,student) %></td>
+        <td><%= link_to 'Edit', edit_gbook_student_path(@gbook,student) %></td>
+        <td><%= link_to 'Destroy', gbook_student_path(@gbook,student), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
