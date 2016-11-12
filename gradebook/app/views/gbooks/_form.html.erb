@@ -1,17 +1,3 @@
 <%= form_for(@gbook) do |f| %>
-  <% if @gbook.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@gbook.errors.count, "error") %> prohibited this gbook from being saved:</h2>
-
-      <ul>
-      <% @gbook.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit %>
 <% end %>

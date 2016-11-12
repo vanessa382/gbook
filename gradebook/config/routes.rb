@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   resources :gbooks do
-     resources :students do
-      resources :grades
+    resources :students do
+      resources :assignments do
+        resources :grades
+      end
     end
     resources :categories
     resources :assignments do
-      resources :grades
+      resources :students do
+        resources :grades
+      end
     end
   end
   root 'gbooks#new'

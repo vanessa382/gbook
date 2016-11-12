@@ -1,21 +1,28 @@
-<p id="notice"><%= notice %></p>
+<% if @gbook.students.size == 0 %>
+
 <p>
-	<%= link_to 'Add Student', new_gbook_student_path(@gbook) %>
+	<%= link_to 'Add Students', gbook_students_path(@gbook) %>
 <p>
-<p>
-	<%= link_to 'View Students', gbook_students_path(@gbook) %>
-<p>
-<p>
-	<%= link_to 'Add Category', new_gbook_category_path(@gbook) %>
-<p>
-<p>
-	<%= link_to 'View Categories', gbook_categories_path(@gbook) %>
-<p>
-<p>
-	<%= link_to 'Add Assignment', new_gbook_assignment_path(@gbook) %>
-<p>
-<p>
-	<%= link_to 'View Assignments', gbook_assignments_path(@gbook) %>
-<p>
-<%= link_to 'Edit', edit_gbook_path(@gbook) %> |
-<%= link_to 'Back', gbooks_path %>
+
+<% else %>
+	<h2>Students</h2>
+	<% @gbook.students.each do |student| %>
+		<p> <%= link_to student.name, gbook_student_path(@gbook,student)%> </p>
+	<% end %>
+	<br>
+	<br>
+	<p>
+		<%= link_to 'Students', gbook_students_path(@gbook) %>
+	<p>
+	<p>
+		<%= link_to 'Categories', gbook_categories_path(@gbook) %>
+	<p>
+	<p>
+		<%= link_to 'Add Assignment', new_gbook_assignment_path(@gbook) %>
+	<p>
+	<p>
+		<%= link_to 'View Assignments', gbook_assignments_path(@gbook) %>
+	<p>
+	<%= link_to 'Edit', edit_gbook_path(@gbook) %> |
+	<%= link_to 'Back', gbooks_path %>
+<% end %>

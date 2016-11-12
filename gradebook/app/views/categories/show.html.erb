@@ -1,25 +1,11 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Category:</strong>
-  <%= @category.name %>
-</p>
-<p>
-  <strong>Weight:</strong>
-  <%= @category.weight %>
-</p>
-
-<p>
-	<strong>Assignments:</strong>
-  <% @gbook.assignments.each do |assignment| %>
-  	<% if assignment.category_id == @category.id %>
-  		<p>
-  			<strong>Name:</strong>
-  			<%= assignment.name %>
-  			<strong>Point total:</strong>
-  			<%= assignment.point_total %>
-			</p>
-		<% end %>
-	<% end %>
-</p>
-<%= link_to 'Edit', edit_gbook_category_path(@gbook,@category) %> |
-<%= link_to 'Back', gbook_categories_path %>
+<% @category = @gbook.categories.find(params[:id]) %>
+<%= @category.name %> 
+<br>
+<%= "Assignments: " %> 
+<br>
+<% @category.assignments.each do |assignment| %>
+	<%= assignment.name %> 
+	<br>
+<% end %>
+<br>
+<%= link_to 'Home Page', gbook_path(@gbook) %>
