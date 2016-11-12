@@ -1,5 +1,7 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
+  before_action :set_student
+  before_action :set_assignment
 
   # GET /grades
   # GET /grades.json
@@ -24,16 +26,14 @@ class GradesController < ApplicationController
   # POST /grades
   # POST /grades.json
   def create
-    @grade = Grade.new(grade_params)
-
-    respond_to do |format|
-      if @grade.save
-        format.html { redirect_to @grade, notice: 'Grade was successfully created.' }
-        format.json { render :show, status: :created, location: @grade }
-      else
-        format.html { render :new }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
-      end
+    @grade = @assignment.grades.create(grade_params)
+    @grade.student_id = @student.id
+    @grade.assignment_id = @assignment.id
+    @gbook = Gbook.find(@assignment.gbook_id)
+    if @grade.save
+      redirect_to gbook_assignment(@gbook,@assignment)
+    else
+      render :new 
     end
   end
 
@@ -62,6 +62,13 @@ class GradesController < ApplicationController
   end
 
   private
+    def set_student
+      @student = Student.find(params[:student_id])
+    end
+
+    def set_assignment
+      @assignment = Assignment.find(params[:assignment_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_grade
       @grade = Grade.find(params[:id])

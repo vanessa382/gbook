@@ -1,9 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
-
-<%= link_to 'Edit', edit_gbook_student_path(@student) %> |
-<%= link_to 'Back', gbook_students_path %>
+<p> <%= "Name: " + @student.name %> </p>
+<p> <%= "Assignments " %> </p>
+<% @gbook.assignments.each do |assignment| %>
+	<p> <%= assignment.name %> </p>
+<% end %>

@@ -11,9 +11,14 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.select :category_id, [[@gbook.categories.first,@gbook.categories.first],[@gbook.categories.second,@gbook.categories.second],[@gbook.categories.last,@gbook.categories.last]] %>
+    <% list = Array.new %>
+    <% @gbook.categories.each do |category| %>
+      <% list.push([category.name,category.id]) %>
+    <% end %>
+    <%= f.select :category_id, list %>
   </div>
 
   <div class="field">

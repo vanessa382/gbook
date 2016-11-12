@@ -1,5 +1,5 @@
 class GbooksController < ApplicationController
-  before_action :set_gbook, only: [:show, :edit, :update, :destroy]
+  before_action :set_gbook, only: [:show, :edit,  :update, :destroy]
 
   # GET /gbooks
   # GET /gbooks.json
@@ -20,21 +20,13 @@ class GbooksController < ApplicationController
   # GET /gbooks/1/edit
   def edit
   end
-
+ 
   # POST /gbooks
   # POST /gbooks.json
   def create
     @gbook = Gbook.new(gbook_params)
-
-    respond_to do |format|
-      if @gbook.save
-        format.html { redirect_to @gbook, notice: 'Gbook was successfully created.' }
-        format.json { render :show, status: :created, location: @gbook }
-      else
-        format.html { render :new }
-        format.json { render json: @gbook.errors, status: :unprocessable_entity }
-      end
-    end
+    @gbook.save
+    redirect_to @gbook
   end
 
   # PATCH/PUT /gbooks/1
