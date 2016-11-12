@@ -1,5 +1,16 @@
 <p> <%= "Name: " + @student.name %> </p>
 <p> <%= "Assignments " %> </p>
 <% @gbook.assignments.each do |assignment| %>
-	<p> <%= assignment.name %> </p>
+	<p> <%= link_to assignment.name, gbook_assignment_path(@gbook,assignment) %> 
+	<% found = false %>
+	<% @student.grades.each do |grade| %> 
+		<% if assignment.id == grade.assignment_id %>
+			<% found = true %>
+			<%= link_to grade.score.to_s, edit_gbook_assignment_student_grade_path(@gbook,assignment,@student,grade) %> 
+		<% end %> 
+	<% end %> 
+	<% if found == false %> 
+		<%= link_to 'Add Score', new_gbook_assignment_student_grade_path(@gbook,assignment,@student) %>
+	<% end %>
 <% end %>
+</p>

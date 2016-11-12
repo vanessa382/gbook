@@ -4,10 +4,25 @@ class CategoriesController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
   def create
     @category = @gbook.categories.create(category_params)
     @category.gbook_id = @gbook.id
     redirect_to gbook_categories_path(@gbook)
+  end
+
+  def update
+    respond_to do |format|
+      if @category.update(category_params)
+        format.html { redirect_to gbook_category_path(@gbook,@category), notice: 'Grade was successfully updated.' }
+        format.json { render :show, status: :ok, location: @grade }
+      else
+        format.html { render :edit }
+        format.json { render json: @grade.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy

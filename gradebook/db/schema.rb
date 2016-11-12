@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20161111182430) do
 
   create_table "students", force: :cascade do |t|
     t.string   "name"
+    t.integer  "gbook_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "gbook_id"
   end
 
 end

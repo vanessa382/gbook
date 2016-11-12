@@ -12,16 +12,25 @@
 
 <p>
   <strong>Category:</strong>
-  <%= Category.find(@assignment.category_id).name %>
+  <% @category = Category.find(@assignment.category_id) %>
+  <%= link_to @category.name, gbook_category_path(@gbook,@category) %>
 </p>
 
 <% @gbook.students.each do |student| %>
-	<p> <%= student.name %> </p>
+	<p> <%= link_to student.name, gbook_student_path(@gbook,student) %> 
+	<% found = false %>
+	<% @assignment.grades.each do |grade| %>
+		<% if student.id == grade.student_id %>
+			<% found = true %>
+			<%= link_to grade.score.to_s, edit_gbook_assignment_student_grade_path(@gbook,@assignment,student,grade) %> 
+		<% end %> 
+	<% end %> 
+	<% if found == false %> 
+		<%= link_to 'Add Score', new_gbook_assignment_student_grade_path(@gbook,@assignment,student) %>
+	<% end %>
 <% end %>
+</p>
 
-<% @assignment.grades.each do |grade| %>
-	<%= Student.find(grade.student_id).name + grade.score.to %>
-<% end %>
 
 <%= link_to 'Edit', edit_gbook_assignment_path(@gbook,@assignment) %> |
 <%= link_to 'Back', gbook_assignments_path %>

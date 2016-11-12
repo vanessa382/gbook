@@ -2,6 +2,7 @@ class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
   before_action :set_student
   before_action :set_assignment
+  before_action :set_gbook, only: [:create, :update]
 
   # GET /grades
   # GET /grades.json
@@ -28,10 +29,9 @@ class GradesController < ApplicationController
   def create
     @grade = @assignment.grades.create(grade_params)
     @grade.student_id = @student.id
-    @grade.assignment_id = @assignment.id
-    @gbook = Gbook.find(@assignment.gbook_id)
+    
     if @grade.save
-      redirect_to gbook_assignment(@gbook,@assignment)
+      redirect_to gbook_assignment_path(@gbook,@assignment)
     else
       render :new 
     end
@@ -42,7 +42,7 @@ class GradesController < ApplicationController
   def update
     respond_to do |format|
       if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.' }
+        format.html { redirect_to gbook_assignment_path(@gbook,@assignment), notice: 'Grade was successfully updated.' }
         format.json { render :show, status: :ok, location: @grade }
       else
         format.html { render :edit }
@@ -62,6 +62,9 @@ class GradesController < ApplicationController
   end
 
   private
+    def set_gbook
+      @gbook = Gbook.find(params[:gbook_id])
+    end
     def set_student
       @student = Student.find(params[:student_id])
     end

@@ -5,9 +5,26 @@
 <p>
 
 <% else %>
-	<h2>Students</h2>
+	<%= "Students" %>
+	<% @gbook.assignments.each do |assignment| %>
+		<%= link_to "     " + assignment.name, gbook_assignment_path(@gbook,assignment) %>
+	<% end %>
 	<% @gbook.students.each do |student| %>
-		<p> <%= link_to student.name, gbook_student_path(@gbook,student)%> </p>
+		<p> 
+		<%= link_to student.name, gbook_student_path(@gbook,student)%>
+		<% @gbook.assignments.each do |assignment| %>
+			<% found = false %>
+			<% student.grades.each do |grade| %> 
+				<% if assignment.id == grade.assignment_id %>
+					<% found = true %>
+					<%= link_to grade.score.to_s, edit_gbook_assignment_student_grade_path(@gbook,assignment,student,grade) %> 
+				<% end %>
+			<% end %>
+			<% if found == false %> 
+				<%= link_to 'Add Score', new_gbook_assignment_student_grade_path(@gbook,assignment,student) %>
+			<% end %>
+		<% end %> 
+	</p>
 	<% end %>
 	<br>
 	<br>
